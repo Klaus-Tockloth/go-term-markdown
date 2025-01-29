@@ -2,14 +2,14 @@ package misc
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
-	markdown "github.com/MichaelMure/go-term-markdown"
+	markdown "github.com/Klaus-Tockloth/go-term-markdown"
 )
 
 func main() {
 	path := "Readme.md"
-	source, err := ioutil.ReadFile(path)
+	source, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}

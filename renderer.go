@@ -12,7 +12,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/MichaelMure/go-term-text"
+	text "github.com/MichaelMure/go-term-text"
 	"github.com/alecthomas/chroma"
 	"github.com/alecthomas/chroma/formatters"
 	"github.com/alecthomas/chroma/lexers"
@@ -24,7 +24,7 @@ import (
 	"github.com/kyokomi/emoji/v2"
 	"golang.org/x/net/html"
 
-	htmlWalker "github.com/MichaelMure/go-term-markdown/html"
+	htmlWalker "github.com/Klaus-Tockloth/go-term-markdown/html"
 )
 
 /*
@@ -127,7 +127,7 @@ type renderer struct {
 	table *tableRenderer
 }
 
-/// NewRenderer creates a new instance of the console renderer
+// / NewRenderer creates a new instance of the console renderer
 func NewRenderer(lineWidth int, leftPad int, opts ...Options) *renderer {
 	r := &renderer{
 		lineWidth:       lineWidth,
@@ -559,7 +559,7 @@ func (r *renderer) renderHTMLBlock(w io.Writer, node *ast.HTMLBlock) {
 						return htmlWalker.GoToNext
 					}
 					// remove all line breaks, those are fully managed in HTML
-					content = strings.Replace(content, "\n", "", -1)
+					content = strings.ReplaceAll(content, "\n", "")
 					align := getDivHTMLAttr(node.Attr)
 					content, _ = text.WrapWithPadAlign(content, r.lineWidth, r.pad(), align)
 					_, _ = fmt.Fprint(&buf, content, "\n\n")

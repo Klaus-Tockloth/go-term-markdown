@@ -44,7 +44,7 @@ func (a *astSetRenderer) RenderNode(w io.Writer, node ast.Node, entering bool) a
 			str := fmt.Sprintf("%T --> %T\n", node, child)
 			if _, has := a.set[str]; !has {
 				a.set[str] = struct{}{}
-				_, _ = fmt.Fprintf(a.f, strings.Replace(str, "*ast.", "", -1))
+				_, _ = fmt.Fprintf(a.f, strings.ReplaceAll(str, "*ast.", ""))
 			}
 		}
 	}

@@ -33,7 +33,7 @@ func (a *astRenderer) RenderNode(w io.Writer, node ast.Node, entering bool) ast.
 	if entering {
 		for _, child := range node.GetChildren() {
 			str := fmt.Sprintf("%T --> %T\n", node, child)
-			_, _ = fmt.Fprintf(a.f, strings.Replace(str, "*ast.", "", -1))
+			_, _ = fmt.Fprintf(a.f, strings.ReplaceAll(str, "*ast.", ""))
 		}
 	}
 

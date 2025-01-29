@@ -1,7 +1,6 @@
 package markdown
 
 import (
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -30,10 +29,10 @@ func TestRender(t *testing.T) {
 		name := strings.TrimRight(file, ".md")
 
 		t.Run(name, func(t *testing.T) {
-			source, err := ioutil.ReadFile(path.Join(sourcepath, name+".md"))
+			source, err := os.ReadFile(path.Join(sourcepath, name+".md"))
 			require.NoError(t, err)
 
-			expected, err := ioutil.ReadFile(path.Join(resultpath, name+".txt"))
+			expected, err := os.ReadFile(path.Join(resultpath, name+".txt"))
 			require.NoError(t, err)
 
 			output := Render(string(source), 40, 4)
@@ -71,12 +70,12 @@ func Test__DoRender(t *testing.T) {
 		// 	return nil
 		// }
 
-		source, err := ioutil.ReadFile(path.Join(sourcepath, name+".md"))
+		source, err := os.ReadFile(path.Join(sourcepath, name+".md"))
 		require.NoError(t, err)
 
 		output := Render(string(source), 40, 4)
 
-		err = ioutil.WriteFile(path.Join(resultpath, name+".txt"), output, 0666)
+		err = os.WriteFile(path.Join(resultpath, name+".txt"), output, 0666)
 		require.NoError(t, err)
 
 		return nil
